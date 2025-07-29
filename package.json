@@ -1,0 +1,24 @@
+{
+  "name": "apiquerysql",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/ShangYJQ/apiQuerySql#readme",
+  "bugs": {
+    "url": "https://github.com/ShangYJQ/apiQuerySql/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShangYJQ/apiQuerySql.git"
+  },
+  "license": "ISC",
+  "author": "ShangYJQ",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql2": "^3.14.2"
+  }
+}
