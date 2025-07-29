@@ -1,10 +1,20 @@
 import axios from "axios";
+import jsonConfig from '../config/index.js'
 
-const response = await axios.post('http://localhost:29999/api/', {
+const config = jsonConfig()
+
+const startTime = Date.now();
+
+const response = await axios.post('http://localhost:' + config["listenPort"] + '/api/', {
     opt: "query",
     keyColumn: "username",
-    keyValue: "yjq",
+    keyValue: "zs",
 });
+
+const endTime = Date.now();
+
+console.log("耗时 " + (endTime - startTime) + " 毫秒")
+
 const data = response.data;
 
 
