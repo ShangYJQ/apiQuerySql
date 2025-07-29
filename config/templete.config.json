@@ -1,0 +1,10 @@
+{
+  "connectionLimit": 10,
+  "host": "",
+  "port": 3306,
+  "listenPort": 3000,
+  "user": "",
+  "password": "",
+  "database": "",
+  "table": ""
+}

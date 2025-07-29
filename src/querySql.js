@@ -1,54 +1,61 @@
-'use strict';
-
 import mysql from 'mysql2/promise'
+import configSql from '../config/index.js'
+
+const conf = configSql()
 
 const pool = mysql.createPool({
-    connectionLimit: 10,
-    host: '116.62.79.107',
-    port: 3306,
-    user: 'root',
-    password: 'mysql985211',
-    database: 'webdata'
+    connectionLimit: conf['connectionLimit'],
+    host: conf['host'],
+    port: conf['port'],
+    user: conf['user'],
+    password: conf['password'],
+    database: conf['database'],
 });
 
-async function queryDatabase(tableName) {
+console.log('数据池已连接')
+
+const tableInPool = conf['table'];
+
+async function queryDatabase(keyColumn, keyValue) {
     let connection;
-    let results;
+    let result;
     try {
-        // 从连接池获取一个连接
         connection = await pool.getConnection();
         console.log("成功连接到数据库！");
 
-        // 执行查询, await会等待查询完成
-        // pool.query() 返回一个数组，第一个元素是行数据，第二个是字段信息
-        const [rows, fields] = await connection.query('SELECT * FROM ' + tableName); // 假设表名为 'users'
+        const sqlTemplate = 'SELECT * FROM ?? WHERE ?? = ?';
+        const params = [tableInPool, keyColumn, keyValue];
 
-        console.log('数据库读取成功',rows)
-        results = rows;
+        const [rows] = await connection.query(sqlTemplate, params);
+
+        console.log('数据库读取成功')
+        result = rows;
 
 
     } catch (error) {
-        // 如果发生任何错误，在这里捕获
         console.error('数据库操作出错:', error);
     } finally {
-        // 4. 无论成功还是失败，最后都必须释放连接
         if (connection) {
             connection.release();
             console.log("数据库连接已释放");
         }
     }
-
-    console.log("@@@",results)
-    return results;
+    return result;
 }
 
+//查询函数
+export default async function querySql(keyColumn, keyValue) {
+    console.log("准备查询 " + conf["database"] + " 数据库 " + tableInPool + " 表 [" + keyColumn + " 中的 " + keyValue + ']');
 
-export default function querySql(tableName) {
-    const result = queryDatabase(tableName).then(r => {
-        console.log("数据池释放")
-        pool.end()
-    })
-    console.log(result);
+    let returnRes = []
+    try {
+        returnRes = await queryDatabase(keyColumn, keyValue)
+    } catch (error) {
+        console.error("查询出错:", error);
+        throw error;
+    } finally {
+        console.log("数据池已释放");
+    }
+    console.log("查询结果有 " + returnRes.length + " 个\n" + JSON.stringify(returnRes))
+    return returnRes;
 }
-
-querySql("users")

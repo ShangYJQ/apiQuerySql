@@ -1,19 +1,8 @@
 // 这是一个配置文件
 
-const configSqlPool = {
-    connectionLimit: 10,
-    host: '116.62.79.107',
-    port: 3306,
-    user: 'root',
-    password: 'mysql985211',
-    database: 'webdata'
-}
+import jsonConfig from './config.json' with {type: 'json'}
 
-const configSql = {
-    configSqlPool,
-    table: "users"
-}
-
+const configSql = jsonConfig
 
 export default function () {
     return configSql
