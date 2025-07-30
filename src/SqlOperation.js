@@ -16,6 +16,6 @@ export default async function sqlOperation(template, values) {
     } finally {
         // 将连接归还给连接池
         pool.releaseConnection(connection);
-        console.log("数据库连接已归");
+        console.log("数据库连接断开");
     }
 };
