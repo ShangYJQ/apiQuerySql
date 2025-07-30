@@ -5,7 +5,6 @@ const pool = mysql.createPool(getPoolConfig())
 
 export default async function sqlOperation(template, values) {
 
-
     console.log("收到操作请求: template: ", template, "values: ", values);
 
     const connection = await pool.getConnection();
@@ -15,10 +14,8 @@ export default async function sqlOperation(template, values) {
     } catch (err) {
         console.error(err);
     } finally {
-        // 4. 将连接归还给连接池
+        // 将连接归还给连接池
         pool.releaseConnection(connection);
         console.log("数据库连接已归");
     }
 };
-
-

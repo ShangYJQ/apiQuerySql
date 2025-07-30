@@ -16,7 +16,3 @@ export default function getFormattedTime() {
     }
     return `${partMap.year}-${partMap.month}-${partMap.day} ${partMap.hour}:${partMap.minute}:${partMap.second}`;
 }
-
-
-
-

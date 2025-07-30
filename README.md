@@ -1,4 +1,6 @@
-## A simple `mysql api server` made by `Node.js`
+## A simple mysql api server made by `Node.js` with `mysql2` and `express`
+
+#### It runs an express server to listen post requset with json data and change it to `execute(sql, values)` function in `mysql2`
 
 ## How to use?
 1. clone the repositories
@@ -17,4 +19,16 @@ npm run server
 
 ## Tips
 1. You can test and learn the function by running `npm run client`
-2. using `tmux` to run the server maybe a good choice,anyway it is just a very simple api server
+2. Using `tmux` to run the server maybe a good choice,anyway it is just a very simple api server
+3. You can use the function below to use in you project as a hook
+
+```javascript
+export default async function useSqlApi(ip, apiurl, port, sqloperation) {
+    const startTime = Date.now();
+    const response = await axios.post(ip + port + apiurl, sqloperation);
+    const endTime = Date.now();
+    console.log("耗时 " + (endTime - startTime) + " 毫秒")
+    const data = response.data;
+    return JSON.parse(data[0]["result"])
+}
+```

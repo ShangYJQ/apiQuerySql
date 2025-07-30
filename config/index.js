@@ -2,8 +2,8 @@
 
 import jsonConfig from './config.json' with {type: 'json'}
 
+//你可以添加更多 config 参数
 export function getPoolConfig() {
-    // console.log("返回sql pool config")
     return jsonConfig['sqlConfig']
 }
 

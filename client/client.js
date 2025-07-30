@@ -20,17 +20,11 @@ const example = {
 
 //你可以直接把这个函数放在你的前端项目里
 export default async function useSqlApi(ip, apiurl, port, sqloperation) {
-
     const startTime = Date.now();
-
     const response = await axios.post(ip + port + apiurl, sqloperation);
-
     const endTime = Date.now();
-
     console.log("耗时 " + (endTime - startTime) + " 毫秒")
-
     const data = response.data;
-
     return JSON.parse(data[0]["result"])
 }
 
