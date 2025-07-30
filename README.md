@@ -4,6 +4,7 @@
 1. clone the repositories
 ```shell
 git clone https://github.com/ShangYJQ/apiQuerySql.git
+cd apiQuerySql
 ```
 
 2. rename the `templete.config.json` to `config.json` and config the file

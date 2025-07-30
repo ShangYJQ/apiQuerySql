@@ -1,27 +1,43 @@
 import express from 'express'
-import querySql from './querySql.js'
-import jsonConfig from '../config/index.js'
+import getFormattedTime from "./logger.js";
+import {getExpressConfig} from '../config/index.js'
+import sqlOperation from "./SqlOperation.js";
 
-const app = express()
-const port = jsonConfig()["listenPort"]
+const originalLog = console.log;
+console.log = function (...args) {
+    const beautifulTime = getFormattedTime();
+    originalLog.apply(console, [`[${beautifulTime}]`, ...args]);
+};
 
-app.use(express.json())
+//获得监听端口
+const listPort = getExpressConfig().listPort
+const apiUrl = getExpressConfig().apiUrl
 
-app.post('/api', async (req, res) => {
+try {
+    const app = express()
 
-    const body = req.body;
-    console.log("收到api请求: ", body);
-    if (body["opt"] == "query") {
-        const sqlData = await querySql(body["keyColumn"], body["keyValue"]);
-        res.json(sqlData)
-    } else {
-        res.json(req.body)
-    }
+//创建监听服务器 并开启JSON支持
+    app.use(express.json())
 
-})
+    app.post(apiUrl, async (req, res) => {
 
-// querySql("username","yjq")
+        //获得的 sql 命令
+        const sqlTemplate = req.body['template'];
+        const sqlValues = req.body['values'];
 
-app.listen(port, () => {
-    console.log(`api sql server 正在监听 http://localhost:${port}`);
-});
+
+        const {result, fields} = await sqlOperation(sqlTemplate, sqlValues)
+        res.json([{
+            result: JSON.stringify(result),
+            fields: JSON.stringify(fields),
+        }])
+
+    })
+    //开始监听
+    app.listen(listPort, () => {
+        console.log(`express 正在监听 http://localhost:${listPort}${apiUrl} 的 post 请求`);
+    });
+
+} catch (error) {
+    console.error(error)
+}

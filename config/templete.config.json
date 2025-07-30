@@ -1,10 +1,14 @@
 {
-  "connectionLimit": 10,
-  "host": "",
-  "port": 3306,
-  "listenPort": 3000,
-  "user": "",
-  "password": "",
-  "database": "",
-  "table": ""
+  "sqlConfig": {
+    "connectionLimit": 10,
+    "host": "",
+    "port": 3306,
+    "user": "root",
+    "password": "",
+    "database": ""
+  },
+  "expressConfig": {
+    "listenPort": 30001,
+    "apiUrl": "/api"
+  }
 }

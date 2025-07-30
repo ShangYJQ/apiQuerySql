@@ -16,7 +16,7 @@
   "main": "src/index.js",
   "scripts": {
     "server": "echo \"Running api mysql server...\" && node src/index.js",
-    "client": "echo \"Running test client...\" && node test/client.js",
+    "client": "echo \"Running api sql client...\" && node client/client.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
