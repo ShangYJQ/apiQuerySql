@@ -2,6 +2,7 @@ import express from 'express'
 import getFormattedTime from "./logger.js";
 import {getExpressConfig} from '../config/index.js'
 import sqlOperation from "./SqlOperation.js";
+import cors from "cors";
 
 //覆写 console.log() 使其加上时间信息
 const originalLog = console.log;
@@ -17,7 +18,9 @@ const apiUrl = getExpressConfig().apiUrl
 try {
     const app = express()
 
-//创建监听服务器 并开启JSON支持
+    //添加 cors 解决跨域问题
+    app.use(cors())
+    //创建监听服务器 并开启JSON支持
     app.use(express.json())
 
     app.post(apiUrl, async (req, res) => {
