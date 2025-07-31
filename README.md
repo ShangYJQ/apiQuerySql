@@ -1,6 +1,6 @@
-## A simple mysql api server made by `Node.js` with `mysql2` and `express`
+## A simple mysql api server made by `Node.js` with `sqlfunc` and `express`
 
-#### It runs an express server to listen post requset with json data and change it to `execute(sql, values)` function in `mysql2`
+#### It runs an express server to listen post requset with json data and change it to `execute(sql, values)` function in `sqlfunc`
 
 ## How to use?
 1. clone the repositories

@@ -5,7 +5,9 @@
     "port": 3306,
     "user": "root",
     "password": "",
-    "database": ""
+    "database": "",
+    "charset": "utf8mb4",
+    "timezone": "+08:00"
   },
   "expressConfig": {
     "listenPort": 30001,

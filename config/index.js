@@ -9,9 +9,7 @@ export function getPoolConfig() {
 
 export function getExpressConfig() {
     const conf = jsonConfig['expressConfig'];
-
     const listPort = conf['listenPort'];
     const apiUrl = conf['apiUrl'];
     return {listPort, apiUrl};
-
 }

@@ -13,10 +13,10 @@
   "license": "ISC",
   "author": "ShangYJQ",
   "type": "module",
-  "main": "src/index.js",
+  "main": "src/server.js",
   "scripts": {
-    "server": "echo \"Running api mysql server...\" && node src/index.js",
-    "client": "echo \"Running api sql client...\" && node client/client.js",
+    "server": "echo \"Running api mysql server...\" && node src/server.js",
+    "client": "echo \"Running api sql client...\" && node test/client.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -24,7 +24,10 @@
     "axios": "^1.11.0",
     "cors": "^2.8.5",
     "express": "^5.1.0",
-    "mysql2": "^3.14.3"
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.1",
+    "mysql2": "^3.14.3",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
