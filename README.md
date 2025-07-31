@@ -23,9 +23,9 @@ npm run server
 3. You can use the function below to use in you project as a hook
 
 ```javascript
-export default async function useSqlApi(ip, apiurl, port, sqloperation) {
+export default async function useSqlApi(baseUrl, apiUrl, postData) {
     const startTime = Date.now();
-    const response = await axios.post(ip + port + apiurl, sqloperation);
+    const response = await axios.post(baseUrl + apiUrl, postData);
     const endTime = Date.now();
     console.log("耗时 " + (endTime - startTime) + " 毫秒")
     const data = response.data;
